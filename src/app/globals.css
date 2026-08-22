@@ -1,26 +1,103 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* Night Beach palette — matches the app's dark mode */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-sand: #1A1F28;
+  --color-sand-light: #232936;
+  --color-surface: #232936;
+  --color-surface-raised: #2D3445;
+  --color-surface-hover: #363D52;
+  --color-ocean: #14B8A6;
+  --color-ocean-deep: #0D9488;
+  --color-ocean-dark: #0A7A6E;
+  --color-ocean-bright: #2DD4BF;
+  --color-ocean-muted: #4A8077;
+  --color-foam: #1E2330;
+  --color-coral: #F97362;
+  --color-coral-muted: #E8A99E;
+  --color-sunset: #ED8936;
+  --color-wave: #14B8A6;
+  --color-ink: #E8EAF0;
+  --color-ink-soft: #8893A8;
+  --color-ink-dim: #555E70;
+  --color-border: #363D52;
+  --color-border-accent: #2D5F5A;
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #1A1F28;
+  --foreground: #E8EAF0;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Animated wave gradient for hero background — deep ocean night */
+@keyframes wave-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.wave-gradient {
+  background: linear-gradient(
+    135deg,
+    #0D2730 0%,
+    #0D9488 25%,
+    #14B8A6 50%,
+    #0D9488 75%,
+    #0D2730 100%
+  );
+  background-size: 200% 200%;
+  animation: wave-shift 12s ease infinite;
+}
+
+/* Subtle wave SVG animation */
+@keyframes wave-move {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.wave-animate {
+  animation: wave-move 20s linear infinite;
+}
+
+.wave-animate-slow {
+  animation: wave-move 30s linear infinite;
+}
+
+/* Fade in on load */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fade-up 0.8s ease forwards;
+}
+
+.fade-up-delay-1 { animation: fade-up 0.8s ease 0.15s both; }
+.fade-up-delay-2 { animation: fade-up 0.8s ease 0.3s both; }
+.fade-up-delay-3 { animation: fade-up 0.8s ease 0.45s both; }
+
+/* Glow effect for accent elements in dark mode */
+.glow-ocean {
+  box-shadow: 0 0 20px rgba(20, 184, 166, 0.15);
+}
+
+/* Flistr brand slice — purple accent on near-black background */
+.glow-purple {
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
 }
