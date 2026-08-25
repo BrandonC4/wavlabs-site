@@ -1,26 +1,32 @@
 @import "tailwindcss";
 
-/* Night Beach palette — matches the app's dark mode */
+/* Wav — Beach Wave design system
+   Night Beach base with Light Beach accents. The site should feel
+   like the ocean at sunset: deep blues, glowing teals, warm coral. */
+
 @theme inline {
-  --color-sand: #1A1F28;
-  --color-sand-light: #232936;
-  --color-surface: #232936;
-  --color-surface-raised: #2D3445;
-  --color-surface-hover: #363D52;
+  --color-sand: #0F1419;
+  --color-sand-light: #1A2030;
+  --color-surface: #161D2B;
+  --color-surface-raised: #1E2640;
+  --color-surface-hover: #283358;
   --color-ocean: #14B8A6;
   --color-ocean-deep: #0D9488;
   --color-ocean-dark: #0A7A6E;
   --color-ocean-bright: #2DD4BF;
+  --color-ocean-glow: #5EEAD4;
   --color-ocean-muted: #4A8077;
-  --color-foam: #1E2330;
-  --color-coral: #F97362;
+  --color-foam: #0B1018;
+  --color-coral: #FF6B5C;
+  --color-coral-bright: #FF8B7F;
   --color-coral-muted: #E8A99E;
-  --color-sunset: #ED8936;
+  --color-sunset: #F6AD55;
+  --color-sunset-bright: #FFC97A;
   --color-wave: #14B8A6;
-  --color-ink: #E8EAF0;
-  --color-ink-soft: #8893A8;
-  --color-ink-dim: #555E70;
-  --color-border: #363D52;
+  --color-ink: #F0F4F8;
+  --color-ink-soft: #94A3B8;
+  --color-ink-dim: #4A5568;
+  --color-border: #1E2640;
   --color-border-accent: #2D5F5A;
 
   --font-sans: var(--font-geist-sans);
@@ -28,17 +34,18 @@
 }
 
 :root {
-  --background: #1A1F28;
-  --foreground: #E8EAF0;
+  --background: #0F1419;
+  --foreground: #F0F4F8;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Animated wave gradient for hero background — deep ocean night */
+/* ─── Hero wave gradient — deep ocean with glowing teal ──── */
 @keyframes wave-shift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -48,35 +55,76 @@ body {
 .wave-gradient {
   background: linear-gradient(
     135deg,
-    #0D2730 0%,
-    #0D9488 25%,
-    #14B8A6 50%,
-    #0D9488 75%,
-    #0D2730 100%
+    #06141B 0%,
+    #0A4D4A 20%,
+    #0D9488 40%,
+    #14B8A6 55%,
+    #0D9488 70%,
+    #0A4D4A 85%,
+    #06141B 100%
   );
-  background-size: 200% 200%;
-  animation: wave-shift 12s ease infinite;
+  background-size: 300% 300%;
+  animation: wave-shift 14s ease infinite;
 }
 
-/* Subtle wave SVG animation */
+/* ─── Light beach section gradient ─── */
+.beach-gradient {
+  background: linear-gradient(
+    180deg,
+    #0F1419 0%,
+    #0D1F2B 30%,
+    #0A2A35 60%,
+    #0F3540 100%
+  );
+}
+
+/* ─── Glow effects ─── */
+.glow-ocean {
+  box-shadow:
+    0 0 30px rgba(20, 184, 166, 0.2),
+    0 0 60px rgba(20, 184, 166, 0.08);
+}
+
+.glow-ocean-strong {
+  box-shadow:
+    0 0 40px rgba(20, 184, 166, 0.3),
+    0 0 80px rgba(20, 184, 166, 0.12),
+    0 0 120px rgba(20, 184, 166, 0.05);
+}
+
+.glow-coral {
+  box-shadow:
+    0 0 30px rgba(255, 107, 92, 0.2),
+    0 0 60px rgba(255, 107, 92, 0.08);
+}
+
+.glow-purple {
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
+}
+
+/* ─── Wave SVG animations ─── */
 @keyframes wave-move {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
 .wave-animate {
-  animation: wave-move 20s linear infinite;
+  animation: wave-move 18s linear infinite;
 }
 
 .wave-animate-slow {
-  animation: wave-move 30s linear infinite;
+  animation: wave-move 28s linear infinite;
 }
 
-/* Fade in on load */
+.wave-animate-fast {
+  animation: wave-move 12s linear infinite;
+}
+
+/* ─── Fade in on load ─── */
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -85,19 +133,129 @@ body {
 }
 
 .fade-up {
-  animation: fade-up 0.8s ease forwards;
+  animation: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.fade-up-delay-1 { animation: fade-up 0.8s ease 0.15s both; }
-.fade-up-delay-2 { animation: fade-up 0.8s ease 0.3s both; }
-.fade-up-delay-3 { animation: fade-up 0.8s ease 0.45s both; }
+.fade-up-delay-1 { animation: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both; }
+.fade-up-delay-2 { animation: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both; }
+.fade-up-delay-3 { animation: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both; }
 
-/* Glow effect for accent elements in dark mode */
-.glow-ocean {
-  box-shadow: 0 0 20px rgba(20, 184, 166, 0.15);
+/* ─── Scroll-triggered fade-in ─── */
+@keyframes scroll-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Flistr brand slice — purple accent on near-black background */
-.glow-purple {
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
+.scroll-fade {
+  animation: scroll-fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ─── Floating animation for phone mockups ─── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.float-delay {
+  animation: float 6s ease-in-out 2s infinite;
+}
+
+/* ─── Pulse glow for CTA buttons ─── */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(20, 184, 166, 0.3), 0 0 40px rgba(20, 184, 166, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(20, 184, 166, 0.5), 0 0 60px rgba(20, 184, 166, 0.2);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* ─── Shimmer effect for text ─── */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    #2DD4BF 0%,
+    #5EEAD4 25%,
+    #F0F4F8 50%,
+    #5EEAD4 75%,
+    #2DD4BF 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ─── Screenshot hover lift ─── */
+.screenshot-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.screenshot-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(20, 184, 166, 0.2);
+}
+
+/* ─── Glass morphism for cards ─── */
+.glass {
+  background: rgba(22, 29, 43, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(46, 58, 95, 0.4);
+}
+
+.glass-light {
+  background: rgba(240, 244, 248, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(240, 244, 248, 0.12);
+}
+
+/* ─── Scrollbar styling ─── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0F1419;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1E2640;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #283358;
+}
+
+/* ─── Hide scrollbar for screenshot carousel ─── */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
