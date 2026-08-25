@@ -320,6 +320,7 @@ export default function Home() {
               <a href="#flistr" className="transition hover:text-ocean-bright">Flistr</a>
               <a href="#about" className="transition hover:text-ocean-bright">About</a>
               <a href="#beta" className="transition hover:text-ocean-bright">Beta</a>
+              <a href="/support" className="transition hover:text-ocean-bright">Support</a>
             </div>
           </div>
           <div className="mt-8 border-t border-border pt-8 text-center text-sm text-ink-soft">
