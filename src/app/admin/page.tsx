@@ -65,6 +65,49 @@ async function fetchStats() {
     .order("created_at", { ascending: false })
     .limit(20);
 
+  // Reports with reporter and reported user info
+  const reportsDataRes = await supabaseAdmin
+    .from("reports")
+    .select(`
+      id,
+      reason,
+      details,
+      created_at,
+      reporter:profiles!reports_reporter_id_fkey(username),
+      reported:profiles!reports_reported_id_fkey(id, username, display_name, avatar_url, created_at)
+    `)
+    .order("created_at", { ascending: false })
+    .limit(50);
+
+  // Groups with member counts and owner info
+  const groupsDataRes = await supabaseAdmin
+    .from("conversations")
+    .select(`
+      id,
+      title,
+      created_at,
+      owner:profiles!conversations_owner_id_fkey(username)
+    `)
+    .eq("type", "group")
+    .order("created_at", { ascending: false })
+    .limit(50);
+
+  // Get member counts for each group
+  const groupIds = (groupsDataRes.data ?? []).map((g: any) => g.id);
+  let groupMemberCounts: Record<string, number> = {};
+  if (groupIds.length > 0) {
+    const { data: memberData } = await supabaseAdmin
+      .from("conversation_members")
+      .select("conversation_id")
+      .in("conversation_id", groupIds);
+
+    if (memberData) {
+      memberData.forEach((m: any) => {
+        groupMemberCounts[m.conversation_id] = (groupMemberCounts[m.conversation_id] || 0) + 1;
+      });
+    }
+  }
+
   return {
     counts: {
       users: profilesRes.count ?? 0,
@@ -82,6 +125,21 @@ async function fetchStats() {
     },
     recentWaitlist: recentWaitlistRes.data ?? [],
     recentUsers: recentUsersRes.data ?? [],
+    reports: (reportsDataRes.data ?? []).map((r: any) => ({
+      id: r.id,
+      reason: r.reason,
+      details: r.details,
+      created_at: r.created_at,
+      reporter_username: r.reporter?.username ?? "unknown",
+      reported: r.reported ?? null,
+    })),
+    groups: (groupsDataRes.data ?? []).map((g: any) => ({
+      id: g.id,
+      title: g.title ?? "Untitled",
+      created_at: g.created_at,
+      owner_username: g.owner?.username ?? "unknown",
+      member_count: groupMemberCounts[g.id] ?? 0,
+    })),
   };
 }
 
