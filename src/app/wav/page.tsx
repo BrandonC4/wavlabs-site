@@ -113,29 +113,37 @@ export default function WavBetaPage() {
               A gorgeous, intuitive messaging experience built for real connection.
             </p>
           </div>
-          <div className="flex snap-x snap-mandatory gap-8 overflow-x-auto pb-8 no-scrollbar md:justify-center">
-            {[
-              { src: "/screenshots/chats.jpeg", label: "Chats", delay: "0s" },
-              { src: "/screenshots/conversations.jpeg", label: "Conversation", delay: "1s" },
-              { src: "/screenshots/discover.jpeg", label: "Discover", delay: "2s" },
-              { src: "/screenshots/friends.jpeg", label: "Friends", delay: "3s" },
-              { src: "/screenshots/profile.jpeg", label: "Profile", delay: "4s" },
-            ].map((shot) => (
-              <div key={shot.label} className="flex shrink-0 snap-center flex-col items-center gap-4">
-                <div
-                  className="screenshot-card overflow-hidden rounded-[2.5rem] border-2 border-ocean/20 shadow-2xl glow-ocean"
-                  style={{ animation: `float 6s ease-in-out ${shot.delay} infinite` }}
-                >
-                  <Image
-                    src={shot.src}
-                    alt={shot.label}
-                    width={280}
-                    height={607}
-                    className="h-auto w-[280px] object-cover"
-                    priority={shot.label === "Chats"}
-                  />
-                </div>
-                <span className="text-sm font-medium text-ocean-glow">{shot.label}</span>
+        </div>
+
+        {/* Auto-scrolling marquee with edge fade and 3D tilt */}
+        <div className="screenshot-row phone-perspective overflow-hidden">
+          <div className="marquee-track">
+            {[...Array(2)].map((_, dup) => (
+              <div key={dup} className="flex gap-8">
+                {[
+                  { src: "/screenshots/chats.jpeg", label: "Chats", delay: "0s" },
+                  { src: "/screenshots/conversations.jpeg", label: "Conversation", delay: "0.8s" },
+                  { src: "/screenshots/discover.jpeg", label: "Discover", delay: "1.6s" },
+                  { src: "/screenshots/friends.jpeg", label: "Friends", delay: "2.4s" },
+                  { src: "/screenshots/profile.jpeg", label: "Profile", delay: "3.2s" },
+                ].map((shot) => (
+                  <div key={`${dup}-${shot.label}`} className="flex shrink-0 flex-col items-center gap-4">
+                    <div
+                      className="screenshot-card phone-tilt overflow-hidden rounded-[2.5rem] border-2 border-ocean/20 shadow-2xl glow-ocean"
+                      style={{ animation: `float 6s ease-in-out ${shot.delay} infinite` }}
+                    >
+                      <Image
+                        src={shot.src}
+                        alt={shot.label}
+                        width={320}
+                        height={694}
+                        className="h-auto w-[320px] object-cover"
+                        priority={dup === 0 && shot.label === "Chats"}
+                      />
+                    </div>
+                    <span className="text-sm font-medium text-ocean-glow">{shot.label}</span>
+                  </div>
+                ))}
               </div>
             ))}
           </div>
@@ -177,7 +185,7 @@ export default function WavBetaPage() {
 
       {/* ─── Beta Form ───────────────────────────────────────── */}
       <section id="join" className="scroll-mt-24 beach-gradient py-32">
-        <div className="mx-auto max-w-md px-6">
+        <div className="mx-auto max-w-lg px-6">
           <div className="mb-8 text-center">
             <h3 className="text-4xl font-bold text-ink">Wav is now in beta.</h3>
             <p className="mt-3 text-ink-soft">Join the first wave of iOS and Android users.</p>

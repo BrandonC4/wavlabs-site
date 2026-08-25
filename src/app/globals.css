@@ -170,6 +170,55 @@ body {
   animation: float 6s ease-in-out 2s infinite;
 }
 
+/* ─── Auto-scrolling marquee for screenshot carousel ─── */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ─── 3D perspective for phone mockups ─── */
+.phone-perspective {
+  perspective: 1000px;
+}
+
+.phone-tilt {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: rotateY(-8deg) rotateX(2deg);
+}
+
+.phone-tilt:hover {
+  transform: rotateY(0deg) rotateX(0deg) scale(1.05);
+}
+
+/* ─── Center spotlight on active screenshot ─── */
+.screenshot-row {
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+}
+
 /* ─── Pulse glow for CTA buttons ─── */
 @keyframes pulse-glow {
   0%, 100% {
