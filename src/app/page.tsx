@@ -10,6 +10,7 @@ import {
   MapPin,
   Heart,
   ArrowRight,
+  Lock,
 } from "lucide-react";
 
 export default function Home() {
@@ -33,7 +34,7 @@ export default function Home() {
             <a href="#flistr" className="transition hover:text-ocean-bright">Flistr</a>
             <a href="#about" className="transition hover:text-ocean-bright">About</a>
             <a
-              href="#beta"
+              href="/wav"
               className="rounded-full bg-ocean px-5 py-2 text-white transition hover:bg-ocean-bright"
             >
               Join Beta
@@ -73,15 +74,17 @@ export default function Home() {
 
         <div className="relative z-10 flex flex-col items-center text-center text-white">
           <h1 className="fade-up max-w-3xl text-5xl font-bold tracking-tight sm:text-7xl">
-            Ride the wave.
+            Message freely.
           </h1>
           <p className="fade-up-delay-1 mt-6 max-w-xl text-lg text-white/90 sm:text-xl">
-            Wav Labs builds username-first social products that put people first.
-            No ads. No paywalls. Just connection.
+            Username-first messaging. No phone number. No ads.
+          </p>
+          <p className="fade-up-delay-1 mt-2 max-w-xl text-base text-white/70">
+            Find your people, start a conversation, and just talk.
           </p>
           <div className="fade-up-delay-2 mt-10 flex flex-col gap-4 sm:flex-row">
             <a
-              href="#beta"
+              href="/wav"
               className="flex items-center gap-2 rounded-full bg-white px-8 py-3.5 font-semibold text-ocean-deep shadow-lg transition hover:bg-sand-light"
             >
               Join the Beta
@@ -91,9 +94,12 @@ export default function Home() {
               href="#wav"
               className="flex items-center gap-2 rounded-full border-2 border-white/40 px-8 py-3.5 font-semibold text-white transition hover:bg-white/10"
             >
-              Learn More
+              See the App
             </a>
           </div>
+          <p className="fade-up-delay-2 mt-4 text-sm text-white/60">
+            Available now in beta for iOS + Android
+          </p>
         </div>
       </section>
 
@@ -115,10 +121,10 @@ export default function Home() {
             </p>
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               {[
-                { icon: Users, title: "Username discovery", desc: "Find anyone by their @username" },
-                { icon: Zap, title: "Realtime delivery", desc: "Sub-100ms message delivery via Ably" },
-                { icon: Shield, title: "Privacy first", desc: "No phone number required, ever" },
-                { icon: Smartphone, title: "iOS & Android", desc: "Native apps for both platforms" },
+                { icon: Users, title: "Your username is enough", desc: "Connect without giving someone your phone number." },
+                { icon: Zap, title: "Messages that feel instant", desc: "No refreshing. No waiting. Just conversations that move." },
+                { icon: Shield, title: "Privacy by default", desc: "No phone number required, ever. Your data stays yours." },
+                { icon: Smartphone, title: "iOS & Android", desc: "Native apps for both platforms, built for speed." },
               ].map((f) => (
                 <div key={f.title} className="rounded-xl border border-border bg-surface p-5 transition hover:border-ocean/30">
                   <f.icon className="h-6 w-6 text-ocean-bright" />
@@ -132,12 +138,49 @@ export default function Home() {
           {/* Beta waitlist form */}
           <div id="beta" className="scroll-mt-24">
             <div className="mb-6 text-center">
-              <h3 className="text-2xl font-bold text-ink">Join the Private Beta</h3>
-              <p className="mt-2 text-ink-soft">Be first to ride the wave.</p>
+              <h3 className="text-2xl font-bold text-ink">Wav is now in beta.</h3>
+              <p className="mt-2 text-ink-soft">Join the first wave of iOS and Android users.</p>
             </div>
             <div className="rounded-2xl border border-border bg-surface-raised p-2 glow-ocean">
               <WaitlistForm />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Screenshots Carousel ────────────────────────────── */}
+      <section className="bg-foam py-24">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="mb-12 text-center">
+            <h2 className="text-4xl font-bold tracking-tight text-ink">
+              See Wav in action.
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-lg text-ink-soft">
+              A gorgeous, intuitive messaging experience built for real connection.
+            </p>
+          </div>
+          <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-6 md:justify-center">
+            {[
+              { src: "/screenshots/chats.jpeg", label: "Chats" },
+              { src: "/screenshots/conversations.jpeg", label: "Conversation" },
+              { src: "/screenshots/discover.jpeg", label: "Discover" },
+              { src: "/screenshots/friends.jpeg", label: "Friends" },
+              { src: "/screenshots/profile.jpeg", label: "Profile" },
+            ].map((shot) => (
+              <div key={shot.label} className="flex shrink-0 snap-center flex-col items-center gap-3">
+                <div className="overflow-hidden rounded-[2rem] border-4 border-ink/10 shadow-2xl">
+                  <Image
+                    src={shot.src}
+                    alt={shot.label}
+                    width={300}
+                    height={650}
+                    className="h-auto w-[300px] object-cover"
+                    priority={shot.label === "Chats"}
+                  />
+                </div>
+                <span className="text-sm font-medium text-ink-soft">{shot.label}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -289,10 +332,10 @@ export default function Home() {
             Ready to ride the wave?
           </h2>
           <p className="mt-4 text-lg text-white/90">
-            Join the private beta and be among the first to experience Wav.
+            Join the beta and be among the first to experience Wav.
           </p>
           <a
-            href="#beta"
+            href="/wav"
             className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 font-semibold text-ocean-deep shadow-lg transition hover:bg-sand-light"
           >
             Join the Beta
@@ -317,9 +360,9 @@ export default function Home() {
             </div>
             <div className="flex gap-6 text-sm text-ink-soft">
               <a href="#wav" className="transition hover:text-ocean-bright">Wav</a>
+              <a href="/wav" className="transition hover:text-ocean-bright">Beta</a>
               <a href="#flistr" className="transition hover:text-ocean-bright">Flistr</a>
               <a href="#about" className="transition hover:text-ocean-bright">About</a>
-              <a href="#beta" className="transition hover:text-ocean-bright">Beta</a>
               <a href="/support" className="transition hover:text-ocean-bright">Support</a>
             </div>
           </div>
