@@ -1,5 +1,6 @@
 import WaitlistForm from "../components/WaitlistForm";
 import Image from "next/image";
+import type { Metadata } from "next";
 import {
   MessageCircle,
   Users,
@@ -8,6 +9,36 @@ import {
   Smartphone,
   ArrowRight,
 } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Join the Wav Beta — Username-first messaging for iOS & Android",
+  description:
+    "Wav is now in beta. Join the first wave of iOS and Android users. Username-first messaging with no phone number, no ads, and no data selling. See the app and sign up in seconds.",
+  alternates: {
+    canonical: "https://wavlabs.dev/wav",
+  },
+  openGraph: {
+    title: "Join the Wav Beta — Username-first messaging",
+    description:
+      "Wav is now in beta. Join the first wave of iOS and Android users. No phone number. No ads. Just connection.",
+    url: "https://wavlabs.dev/wav",
+    images: [
+      {
+        url: "/screenshots/conversations.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Wav Messenger — conversation",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Join the Wav Beta — Username-first messaging",
+    description:
+      "Wav is now in beta. Join the first wave of iOS and Android users. No phone number. No ads.",
+    images: ["/screenshots/conversations.jpeg"],
+  },
+};
 
 export default function WavBetaPage() {
   return (
