@@ -65,48 +65,86 @@ async function fetchStats() {
     .order("created_at", { ascending: false })
     .limit(20);
 
-  // Reports with reporter and reported user info
+  // Reports — reporter_id and reported_id reference auth.users, not
+  // profiles, so we can't use Supabase joins. Fetch reports first,
+  // then batch-load all referenced profiles.
   const reportsDataRes = await supabaseAdmin
     .from("reports")
-    .select(`
-      id,
-      reason,
-      details,
-      created_at,
-      reporter:profiles!reports_reporter_id_fkey(username),
-      reported:profiles!reports_reported_id_fkey(id, username, display_name, avatar_url, created_at)
-    `)
+    .select("id, reason, details, created_at, reporter_id, reported_id")
     .order("created_at", { ascending: false })
     .limit(50);
 
-  // Groups with member counts and owner info
+  const reportRows = (reportsDataRes.data ?? []) as Array<{
+    id: string;
+    reason: string;
+    details: string | null;
+    created_at: string;
+    reporter_id: string;
+    reported_id: string;
+  }>;
+
+  // Batch-load all profiles referenced in reports.
+  const reportUserIds = Array.from(
+    new Set(reportRows.flatMap((r) => [r.reporter_id, r.reported_id])),
+  );
+  const reportProfilesRes = reportUserIds.length > 0
+    ? await supabaseAdmin
+        .from("profiles")
+        .select("id, username, display_name, avatar_url, created_at")
+        .in("id", reportUserIds)
+    : { data: [], error: null };
+
+  const profileMap: Record<string, any> = {};
+  (reportProfilesRes.data ?? []).forEach((p: any) => {
+    profileMap[p.id] = p;
+  });
+
+  // Groups — owner_id references auth.users, not profiles, so we
+  // can't use a Supabase join. Fetch groups first, then batch-load
+  // owner profiles by their IDs.
   const groupsDataRes = await supabaseAdmin
     .from("conversations")
-    .select(`
-      id,
-      title,
-      created_at,
-      owner:profiles!conversations_owner_id_fkey(username)
-    `)
+    .select("id, title, created_at, owner_id")
     .eq("type", "group")
     .order("created_at", { ascending: false })
     .limit(50);
 
-  // Get member counts for each group
-  const groupIds = (groupsDataRes.data ?? []).map((g: any) => g.id);
-  let groupMemberCounts: Record<string, number> = {};
-  if (groupIds.length > 0) {
-    const { data: memberData } = await supabaseAdmin
-      .from("conversation_members")
-      .select("conversation_id")
-      .in("conversation_id", groupIds);
+  // Batch-load owner profiles and member counts.
+  const groupRows = (groupsDataRes.data ?? []) as Array<{
+    id: string;
+    title: string | null;
+    created_at: string;
+    owner_id: string | null;
+  }>;
+  const groupIds = groupRows.map((g) => g.id);
+  const ownerIds = groupRows
+    .map((g) => g.owner_id)
+    .filter((id): id is string => id !== null);
 
-    if (memberData) {
-      memberData.forEach((m: any) => {
-        groupMemberCounts[m.conversation_id] = (groupMemberCounts[m.conversation_id] || 0) + 1;
-      });
-    }
-  }
+  const [ownersRes, membersRes] = await Promise.all([
+    ownerIds.length > 0
+      ? supabaseAdmin
+          .from("profiles")
+          .select("id, username")
+          .in("id", ownerIds)
+      : Promise.resolve({ data: [], error: null }),
+    groupIds.length > 0
+      ? supabaseAdmin
+          .from("conversation_members")
+          .select("conversation_id")
+          .in("conversation_id", groupIds)
+      : Promise.resolve({ data: [], error: null }),
+  ]);
+
+  const ownerMap: Record<string, string> = {};
+  (ownersRes.data ?? []).forEach((o: any) => {
+    ownerMap[o.id] = o.username;
+  });
+
+  const groupMemberCounts: Record<string, number> = {};
+  (membersRes.data ?? []).forEach((m: any) => {
+    groupMemberCounts[m.conversation_id] = (groupMemberCounts[m.conversation_id] || 0) + 1;
+  });
 
   return {
     counts: {
@@ -125,19 +163,19 @@ async function fetchStats() {
     },
     recentWaitlist: recentWaitlistRes.data ?? [],
     recentUsers: recentUsersRes.data ?? [],
-    reports: (reportsDataRes.data ?? []).map((r: any) => ({
+    reports: reportRows.map((r) => ({
       id: r.id,
       reason: r.reason,
       details: r.details,
       created_at: r.created_at,
-      reporter_username: r.reporter?.username ?? "unknown",
-      reported: r.reported ?? null,
+      reporter_username: profileMap[r.reporter_id]?.username ?? "unknown",
+      reported: profileMap[r.reported_id] ?? null,
     })),
-    groups: (groupsDataRes.data ?? []).map((g: any) => ({
+    groups: groupRows.map((g) => ({
       id: g.id,
       title: g.title ?? "Untitled",
       created_at: g.created_at,
-      owner_username: g.owner?.username ?? "unknown",
+      owner_username: g.owner_id ? (ownerMap[g.owner_id] ?? "unknown") : "unknown",
       member_count: groupMemberCounts[g.id] ?? 0,
     })),
   };
