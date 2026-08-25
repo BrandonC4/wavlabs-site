@@ -1,4 +1,4 @@
-import { supabaseAdmin } from "@/lib/supabase-admin";
+import { getSupabaseAdmin } from "@/lib/supabase-admin";
 import AdminDashboard from "./AdminDashboard";
 import type { Metadata } from "next";
 
@@ -7,7 +7,12 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+// Force dynamic rendering — the page reads env vars only available at
+// runtime and queries Supabase on every request.
+export const dynamic = "force-dynamic";
+
 async function fetchStats() {
+  const supabaseAdmin = getSupabaseAdmin();
   const [
     profilesRes,
     conversationsRes,
@@ -81,6 +86,24 @@ async function fetchStats() {
 }
 
 export default async function AdminPage() {
-  const stats = await fetchStats();
+  let stats;
+  try {
+    stats = await fetchStats();
+  } catch (err) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-sand px-6">
+        <div className="max-w-md text-center">
+          <h1 className="text-2xl font-bold text-ink">Admin not configured</h1>
+          <p className="mt-3 text-ink-soft">
+            {(err as Error).message}
+          </p>
+          <p className="mt-2 text-sm text-ink-dim">
+            Add SUPABASE_SERVICE_ROLE_KEY in Vercel → Settings → Environment
+            Variables, then redeploy.
+          </p>
+        </div>
+      </div>
+    );
+  }
   return <AdminDashboard stats={stats} />;
 }
