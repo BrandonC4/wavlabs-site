@@ -12,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${baseUrl}/wav`,
+      url: `${baseUrl}/l8r`,
       lastModified,
       changeFrequency: "weekly",
       priority: 0.9,

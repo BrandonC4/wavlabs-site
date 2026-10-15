@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
-import { supabase } from "@/lib/supabase";
+import { getL8rAdmin } from "@/lib/l8r-admin";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { error } = await supabase
+  const { error } = await getL8rAdmin()
     .from("waitlist")
     .insert({ email, name, platform });
 
@@ -57,41 +57,40 @@ export async function POST(req: NextRequest) {
 async function sendConfirmationEmail(email: string, name: string | null) {
   try {
     const { error } = await resend.emails.send({
-      from: "Wav <noreply@wavlabs.dev>",
+      from: "l8r <noreply@wavlabs.dev>",
       to: email,
-      subject: "You're on the Wav beta list",
+      subject: "You're on the l8r waitlist",
       html: `
-        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 560px; margin: 0 auto; background: #1A1F28; padding: 40px; border-radius: 16px;">
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 560px; margin: 0 auto; background: #170910; padding: 40px; border-radius: 16px;">
           <div style="text-align: center; margin-bottom: 32px;">
-            <h1 style="color: #2DD4BF; font-size: 28px; margin: 0;">Wav</h1>
-            <p style="color: #8893A8; font-size: 14px; margin: 4px 0 0;">Ride the wave.</p>
+            <h1 style="color: #D8A88E; font-size: 28px; margin: 0;">l8r</h1>
+            <p style="color: #7A5F6B; font-size: 14px; margin: 4px 0 0;">meet someone, l8r.</p>
           </div>
 
-          <p style="color: #E8EAF0; font-size: 16px; line-height: 1.6;">
+          <p style="color: #FFF4F7; font-size: 16px; line-height: 1.6;">
             Hi${name ? ` ${name}` : " there"},
           </p>
 
-          <p style="color: #E8EAF0; font-size: 16px; line-height: 1.6;">
-            You're officially on the Wav beta waitlist. We'll email you as soon as
-            beta access opens up so you can be among the first to try Wav Messenger.
+          <p style="color: #FFF4F7; font-size: 16px; line-height: 1.6;">
+            You're officially on the l8r waitlist. We're rolling out city by
+            city — we'll email you as soon as it lights up near you.
           </p>
 
-          <p style="color: #8893A8; font-size: 14px; line-height: 1.6;">
-            Wav is a username-first social messenger — find people by @username,
-            start conversations, and chat in realtime. No ads, no phone numbers,
-            just connection.
+          <p style="color: #7A5F6B; font-size: 14px; line-height: 1.6;">
+            l8r is a new kind of social discovery — real people, real nearby.
+            No feeds, no noise, and every profile you see is a real person.
           </p>
 
           <div style="text-align: center; margin: 32px 0;">
-            <a href="https://wavlabs.dev" style="background: #14B8A6; color: #fff; text-decoration: none; padding: 12px 32px; border-radius: 999px; font-weight: 600; display: inline-block;">
+            <a href="https://wavlabs.dev/l8r" style="background: #D63242; color: #fff; text-decoration: none; padding: 12px 32px; border-radius: 999px; font-weight: 600; display: inline-block;">
               Visit wavlabs.dev
             </a>
           </div>
 
-          <hr style="border: none; border-top: 1px solid #363D52; margin: 32px 0;" />
+          <hr style="border: none; border-top: 1px solid #43203A; margin: 32px 0;" />
 
-          <p style="color: #555E70; font-size: 12px; text-align: center;">
-            You received this email because you joined the Wav beta waitlist.
+          <p style="color: #7A5F6B; font-size: 12px; text-align: center;">
+            You received this email because you joined the l8r waitlist.
             If this wasn't you, you can safely ignore this email.
           </p>
           <p style="color: #555E70; font-size: 12px; text-align: center;">

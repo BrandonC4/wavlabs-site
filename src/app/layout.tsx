@@ -17,33 +17,29 @@ const SITE_URL = "https://wavlabs.dev";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Wav — Username-first messaging. No phone number. No ads.",
+    default: "l8r — meet someone, l8r",
     template: "%s | Wav Labs",
   },
   description:
-    "Wav is a username-first social messenger. Find people by @username, start conversations, create groups, and chat in realtime. No phone number, no ads, no data selling. Join the beta for iOS and Android.",
+    "l8r is a new kind of social discovery — real people, real nearby. No feeds, no noise, no data selling. Early access for iOS and Android.",
   keywords: [
-    "messaging app",
-    "chat app",
-    "social messenger",
-    "username messaging",
-    "no phone number messaging",
-    "private chat",
-    "group chat",
-    "realtime messaging",
-    "beta app",
-    "wav",
+    "social discovery",
+    "dating app",
+    "meet people nearby",
+    "local dating",
+    "gay dating app",
+    "real people nearby",
+    "private dating",
+    "l8r",
     "wavlabs",
-    "wav messenger",
-    "alternative to kik",
-    "alternative to whatsapp",
-    "anonymous messaging",
-    "username chat",
+    "wav labs",
+    "iOS dating app",
+    "Android dating app",
   ],
   authors: [{ name: "Wav Labs", url: SITE_URL }],
   creator: "Wav Labs",
   publisher: "Wav Labs",
-  applicationName: "Wav",
+  applicationName: "l8r",
   category: "Social",
   icons: {
     icon: [
@@ -60,25 +56,25 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: SITE_URL,
-    siteName: "Wav Labs",
-    title: "Wav — Username-first messaging. No phone number. No ads.",
+    siteName: "l8r",
+    title: "l8r — meet someone, l8r",
     description:
-      "Find people by @username, start conversations, and chat in realtime. No phone number, no ads, no data selling. Join the beta for iOS and Android.",
+      "Real people. Real nearby. A new social discovery app — still early, still growing. iOS & Android.",
     images: [
       {
-        url: "/screenshots/chats.jpeg",
+        url: "/l8r-og.png",
         width: 1200,
         height: 630,
-        alt: "Wav Messenger — chats list",
+        alt: "l8r — the lantern",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Wav — Username-first messaging. No phone number. No ads.",
+    title: "l8r — meet someone, l8r",
     description:
-      "Find people by @username, start conversations, and chat in realtime. Join the beta for iOS and Android.",
-    images: ["/screenshots/chats.jpeg"],
+      "Real people. Real nearby. A new social discovery app — still early, still growing.",
+    images: ["/l8r-og.png"],
     creator: "@wavlabs",
   },
   robots: {
@@ -115,12 +111,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
-              name: "Wav Messenger",
+              name: "l8r",
               applicationCategory: "SocialApplication",
               operatingSystem: "iOS, Android",
               description:
-                "Username-first social messenger. Find people by @username, start conversations, and chat in realtime. No phone number, no ads, no data selling.",
-              url: SITE_URL,
+                "A new kind of social discovery — real people, real nearby. No feeds, no noise, no data selling.",
+              url: `${SITE_URL}/l8r`,
               offers: {
                 "@type": "Offer",
                 price: "0",
@@ -143,7 +139,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               name: "Wav Labs",
               url: SITE_URL,
               description:
-                "Wav Labs builds username-first social products that put people first. No ads. No data selling.",
+                "Wav Labs builds consumer social products that put people first. No ads. No data selling.",
               founders: [
                 { "@type": "Person", name: "Brandon Currie", jobTitle: "Co-Founder & CEO" },
                 { "@type": "Person", name: "Jonathan Snyder", jobTitle: "Co-Founder & COO" },
@@ -152,7 +148,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-sand text-ink">
+      <body className="min-h-full flex flex-col bg-[#170910] text-[#FFF4F7]">
         {children}
       </body>
     </html>
