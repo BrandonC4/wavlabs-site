@@ -16,6 +16,14 @@ export const metadata: Metadata = {
   description:
     "A new kind of social discovery. Real people, real nearby — no feeds, no noise. Still early, still growing. iOS & Android.",
   alternates: { canonical: L8R_URL },
+  icons: {
+    icon: [
+      { url: "/l8r-icon.png", sizes: "512x512", type: "image/png" },
+      { url: "/l8r-favicon.ico", sizes: "any", type: "image/x-icon" },
+    ],
+    apple: [{ url: "/l8r-apple-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: ["/l8r-icon.png"],
+  },
   openGraph: {
     title: "l8r — meet someone, l8r",
     description:

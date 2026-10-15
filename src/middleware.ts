@@ -19,10 +19,18 @@ export function middleware(req: NextRequest) {
     return NextResponse.rewrite(url);
   }
 
+  // The subdomain gets the lantern favicon, not the Wav Labs mark.
+  if (pathname === "/favicon.ico") {
+    const url = req.nextUrl.clone();
+    url.pathname = "/l8r-favicon.ico";
+    return NextResponse.rewrite(url);
+  }
+
   return NextResponse.next();
 }
 
 export const config = {
-  // Skip static assets and API routes.
-  matcher: ["/((?!_next|api|.*\\..*).*)"],
+  // Skip static assets and API routes — but keep /favicon.ico so the
+  // l8r host rewrite above can swap in the lantern mark.
+  matcher: ["/((?!_next|api|.*\\..*).*)", "/favicon.ico"],
 };
