@@ -48,7 +48,22 @@ interface LiveData {
     churned: number;
     retainedPct: number;
   };
-  installs: { today: number; total: number; ios: number; android: number };
+  installs: {
+    today: number;
+    total: number;
+    ios: number;
+    android: number;
+    topModels: { name: string; count: number }[];
+    versions: { name: string; count: number }[];
+    osVersions: { name: string; count: number }[];
+    recent: {
+      platform: string;
+      model: string;
+      os: string | null;
+      app: string | null;
+      at: string;
+    }[];
+  };
   activity: {
     messagesToday: number;
     sparksToday: number;
@@ -360,7 +375,7 @@ export default function LivePage() {
             <span style={label}>Devices Today</span>
           </div>
           <AnimatedNumber value={data.installs.today} size="clamp(2rem,4.5vw,4.5rem)" />
-          <div style={sub}>{data.installs.ios} iOS · {data.installs.android} Android</div>
+          <div style={sub}>{data.installs.total} devices total</div>
         </div>
 
         <div className="relative flex-1 overflow-hidden p-[0.8vh_1vw]" style={card}>
@@ -412,8 +427,8 @@ export default function LivePage() {
         ))}
       </div>
 
-      {/* Row 3 — online users + recent signups */}
-      <div className="flex h-[13vh] min-h-[100px] shrink-0 gap-[0.6vw]">
+      {/* Row 3 — online users + recent signups + devices */}
+      <div className="flex h-[15vh] min-h-[110px] shrink-0 gap-[0.6vw]">
         <div className="flex flex-[3] flex-col overflow-hidden p-[0.8vh_1vw]" style={card}>
           <div className="mb-[0.8vh] flex items-center gap-2">
             <Activity style={{ color: V.green }} className="h-4 w-4" />
@@ -462,6 +477,62 @@ export default function LivePage() {
                 </span>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Devices — platform split + recent installs */}
+        <div className="flex flex-[2.2] flex-col overflow-hidden p-[0.8vh_1vw]" style={card}>
+          <div className="mb-[0.6vh] flex items-center gap-2">
+            <Smartphone style={{ color: V.purple }} className="h-4 w-4" />
+            <span style={label}>Devices</span>
+            <span className="font-mono" style={{ color: V.purple, fontSize: "0.75rem" }}>
+              {data.installs.total}
+            </span>
+          </div>
+
+          {/* iOS / Android split bar */}
+          {(() => {
+            const total = Math.max(data.installs.total, 1);
+            const iosPct = (data.installs.ios / total) * 100;
+            const andPct = (data.installs.android / total) * 100;
+            return (
+              <div className="mb-[0.7vh] shrink-0">
+                <div className="flex h-[0.9rem] overflow-hidden rounded-full" style={{ background: V.cardDeep }}>
+                  <div style={{ width: `${iosPct}%`, background: "linear-gradient(90deg,#e8e8ed,#b9b9c7)" }} />
+                  <div style={{ width: `${andPct}%`, background: "linear-gradient(90deg,#3ddc84,#1fa35c)" }} />
+                </div>
+                <div className="mt-[0.4vh] flex justify-between" style={{ ...sub, fontSize: "clamp(0.55rem,0.7vw,0.7rem)" }}>
+                  <span style={{ color: "#d8d8e2" }}> {data.installs.ios} iOS · {Math.round(iosPct)}%</span>
+                  <span style={{ color: "#3ddc84" }}>🤖 {data.installs.android} Android · {Math.round(andPct)}%</span>
+                </div>
+              </div>
+            );
+          })()}
+
+          <div className="flex-1 space-y-[0.3vh] overflow-hidden">
+            {data.installs.recent.slice(0, 4).map((d, i) => (
+              <div key={`${d.at}-${i}`} className="flex items-center justify-between rounded-lg px-[0.6vw] py-[0.3vh]" style={{ background: `${V.purple}0f` }}>
+                <div className="flex min-w-0 items-center gap-2">
+                  <span style={{ fontSize: "clamp(0.7rem,0.9vw,0.9rem)" }}>
+                    {d.platform === "ios" ? "" : "🤖"}
+                  </span>
+                  <span className="truncate font-semibold" style={{ fontSize: "clamp(0.65rem,0.85vw,0.9rem)" }}>
+                    {d.model}
+                  </span>
+                  {d.os && (
+                    <span className="shrink-0" style={{ ...sub, fontSize: "clamp(0.5rem,0.65vw,0.65rem)" }}>
+                      {d.os}
+                    </span>
+                  )}
+                </div>
+                <span className="shrink-0 font-mono" style={{ ...sub, fontSize: "clamp(0.55rem,0.7vw,0.7rem)" }}>
+                  {d.app ? `v${d.app.split("+")[0]} · ` : ""}{ago(d.at)}
+                </span>
+              </div>
+            ))}
+            {data.installs.recent.length === 0 && (
+              <p style={{ ...sub, padding: "0.5rem 0" }}>No devices registered yet</p>
+            )}
           </div>
         </div>
       </div>

@@ -69,6 +69,37 @@ export async function GET(req: NextRequest) {
     .order("last_seen_at", { ascending: false })
     .limit(8);
 
+  // Installs — every registered device with model/version/platform.
+  const { data: devices } = await db
+    .from("device_tokens")
+    .select("platform, device_model, os_version, app_version, created_at, last_seen_at")
+    .order("created_at", { ascending: false });
+
+  const deviceRows = (devices ?? []) as Array<{
+    platform: string;
+    device_model: string | null;
+    os_version: string | null;
+    app_version: string | null;
+    created_at: string;
+    last_seen_at: string | null;
+  }>;
+
+  const modelCounts = new Map<string, number>();
+  const versionCounts = new Map<string, number>();
+  const osCounts = new Map<string, number>();
+  deviceRows.forEach((d) => {
+    const model = d.device_model ?? "Unknown device";
+    modelCounts.set(model, (modelCounts.get(model) ?? 0) + 1);
+    const ver = d.app_version ?? "pre-1.0";
+    versionCounts.set(ver, (versionCounts.get(ver) ?? 0) + 1);
+    if (d.os_version) osCounts.set(d.os_version, (osCounts.get(d.os_version) ?? 0) + 1);
+  });
+  const top = (m: Map<string, number>, n: number) =>
+    [...m.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, n)
+      .map(([name, count]) => ({ name, count }));
+
   const { count: completeProfiles } = await db
     .from("profiles")
     .select("id", { count: "exact", head: true })
@@ -123,6 +154,16 @@ export async function GET(req: NextRequest) {
       total: devicesTotal.count ?? 0,
       ios: devicesIos.count ?? 0,
       android: devicesAndroid.count ?? 0,
+      topModels: top(modelCounts, 6),
+      versions: top(versionCounts, 6),
+      osVersions: top(osCounts, 6),
+      recent: deviceRows.slice(0, 8).map((d) => ({
+        platform: d.platform,
+        model: d.device_model ?? "Unknown device",
+        os: d.os_version,
+        app: d.app_version,
+        at: d.created_at,
+      })),
     },
     activity: {
       messagesToday: messagesToday.count ?? 0,
