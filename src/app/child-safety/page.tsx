@@ -1,8 +1,9 @@
 import { Shield, AlertTriangle, Mail, Ban, Flag } from "lucide-react";
 
 export const metadata = {
-  title: "Child Safety Standards — Wav Labs",
-  description: "Wav Messenger's safety standards against child sexual abuse and exploitation (CSAE).",
+  title: "Child Safety Standards — l8r by Wav Labs",
+  description:
+    "l8r's safety standards against child sexual abuse and exploitation (CSAE). l8r is strictly 18+.",
 };
 
 export default function ChildSafetyPage() {
@@ -14,32 +15,33 @@ export default function ChildSafetyPage() {
           <h1 className="text-3xl font-bold">Child Safety Standards</h1>
         </div>
 
-        <p className="mb-8 text-sm text-ink-soft">Last updated: August 24, 2026</p>
+        <p className="mb-2 text-sm text-ink-soft">l8r — by Wav Labs</p>
+        <p className="mb-8 text-sm text-ink-soft">Last updated: October 15, 2026</p>
 
         <div className="space-y-8 leading-relaxed text-ink-soft">
           <section>
             <p>
-              Wav Labs is committed to protecting children and has a zero-tolerance policy
-              for child sexual abuse and exploitation (CSAE) on our platform. This page
-              outlines our safety standards, prevention practices, and reporting procedures
-              in compliance with applicable child safety laws.
+              Wav Labs is committed to protecting children and has a zero-tolerance
+              policy for child sexual abuse and exploitation (CSAE) across our
+              products, including l8r. This page outlines our safety standards,
+              prevention practices, and reporting procedures in compliance with
+              applicable child safety laws.
             </p>
           </section>
 
           <section>
             <h2 className="mb-3 text-xl font-semibold text-ink">Minimum Age Requirement</h2>
             <p>
-              Wav Messenger requires users to be at least 13 years old to create an account.
-              Users under 18 are restricted from accessing NSFW content. Age verification is
-              enforced at signup and through date-of-birth requirements in the app.
+              l8r requires users to be at least 18 years old — strictly, with no
+              exceptions. Age verification is enforced at signup through a
+              date-of-birth requirement, and any account found or reasonably believed
+              to belong to a minor is removed immediately.
             </p>
           </section>
 
           <section>
             <h2 className="mb-3 text-xl font-semibold text-ink">Prohibited Content</h2>
-            <p className="mb-3">
-              The following content is strictly prohibited on Wav Messenger:
-            </p>
+            <p className="mb-3">The following content is strictly prohibited on l8r:</p>
             <ul className="space-y-2">
               <li className="flex items-start gap-2">
                 <Ban className="mt-0.5 h-4 w-4 shrink-0 text-danger" />
@@ -66,30 +68,20 @@ export default function ChildSafetyPage() {
               <div className="flex items-start gap-3 rounded-xl border border-ocean/10 bg-white/50 p-4">
                 <Flag className="mt-0.5 h-5 w-5 shrink-0 text-ocean-bright" />
                 <div>
-                  <p className="font-medium text-ink">Report Messages</p>
+                  <p className="font-medium text-ink">Report Profiles</p>
                   <p className="text-sm">
-                    Users can report any message by long-pressing it and selecting
-                    &ldquo;Report.&rdquo; Reports are reviewed and acted on promptly.
+                    Any profile can be reported directly from its profile card or
+                    detail view. Reports are confidential and reviewed by a human.
                   </p>
                 </div>
               </div>
               <div className="flex items-start gap-3 rounded-xl border border-ocean/10 bg-white/50 p-4">
                 <Flag className="mt-0.5 h-5 w-5 shrink-0 text-ocean-bright" />
                 <div>
-                  <p className="font-medium text-ink">Report Users</p>
+                  <p className="font-medium text-ink">Report Messages &amp; Media</p>
                   <p className="text-sm">
-                    Users can report profiles from the user profile sheet. Reported users
-                    are investigated and may be permanently banned.
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 rounded-xl border border-ocean/10 bg-white/50 p-4">
-                <Flag className="mt-0.5 h-5 w-5 shrink-0 text-ocean-bright" />
-                <div>
-                  <p className="font-medium text-ink">Report Groups</p>
-                  <p className="text-sm">
-                    Users can report groups from the group info screen. Groups found to
-                    violate safety standards are removed immediately.
+                    Messages and media can be reported from inside any conversation.
+                    Reported content is sent to moderation for review.
                   </p>
                 </div>
               </div>
@@ -98,8 +90,8 @@ export default function ChildSafetyPage() {
                 <div>
                   <p className="font-medium text-ink">Block Users</p>
                   <p className="text-sm">
-                    Users can block anyone at any time. Blocked users cannot send messages,
-                    friend requests, or interact with the blocking user.
+                    Blocking is instant and total — a blocked member cannot see your
+                    profile, message you, or interact with you anywhere in the app.
                   </p>
                 </div>
               </div>
@@ -109,8 +101,8 @@ export default function ChildSafetyPage() {
           <section>
             <h2 className="mb-3 text-xl font-semibold text-ink">Enforcement Actions</h2>
             <p className="mb-3">
-              Upon confirming a violation of these standards, Wav Labs will take immediate
-              action, which may include:
+              Upon confirming a violation of these standards, Wav Labs will take
+              immediate action, which may include:
             </p>
             <ul className="space-y-2">
               <li>• Permanent account termination</li>
@@ -138,8 +130,8 @@ export default function ChildSafetyPage() {
           <section>
             <h2 className="mb-3 text-xl font-semibold text-ink">Contact</h2>
             <p className="mb-3">
-              For child safety concerns, reports, or questions about our safety practices,
-              contact our designated safety contact:
+              For child safety concerns, reports, or questions about our safety
+              practices, contact our designated safety contact:
             </p>
             <div className="rounded-xl border border-ocean/10 bg-white/50 p-4">
               <div className="flex items-center gap-2">
@@ -149,8 +141,8 @@ export default function ChildSafetyPage() {
                 </a>
               </div>
               <p className="mt-2 text-sm">
-                We respond to child safety reports within 24 hours. For immediate danger,
-                contact your local emergency services.
+                We respond to child safety reports within 24 hours. For immediate
+                danger, contact your local emergency services.
               </p>
             </div>
           </section>
@@ -159,12 +151,19 @@ export default function ChildSafetyPage() {
             <div className="flex items-start gap-3 rounded-xl border border-border bg-foam p-4">
               <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-ocean-bright" />
               <p className="text-sm">
-                <strong className="text-ink">Emergency:</strong> If you believe a child is
-                in immediate danger, contact your local emergency services (911 in the U.S.)
-                or report to NCMEC at 1-800-843-5678.
+                <strong className="text-ink">Emergency:</strong> If you believe a child
+                is in immediate danger, contact your local emergency services (911 in
+                the U.S.) or report to NCMEC at 1-800-843-5678.
               </p>
             </div>
           </section>
+        </div>
+
+        <div className="mt-16 border-t border-border pt-8">
+          <a href="/" className="flex items-center gap-2 text-ocean-bright hover:underline">
+            <img src="/wavlabs-logo.png" alt="" className="h-4 w-4" />
+            Wav Labs
+          </a>
         </div>
       </div>
     </div>

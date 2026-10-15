@@ -1,7 +1,9 @@
 import { FileText } from "lucide-react";
 
 export const metadata = {
-  title: "Terms of Service — Wav Labs",
+  title: "Terms of Service — l8r by Wav Labs",
+  description:
+    "The terms governing use of l8r, a members-only social discovery app for gay men by Wav Labs.",
 };
 
 export default function TermsPage() {
@@ -13,180 +15,144 @@ export default function TermsPage() {
           <h1 className="text-3xl font-bold">Terms of Service</h1>
         </div>
 
-        <p className="mb-8 text-sm text-ink-soft">Last updated: August 22, 2026</p>
+        <p className="mb-2 text-sm text-ink-soft">l8r — by Wav Labs</p>
+        <p className="mb-8 text-sm text-ink-soft">Last updated: October 15, 2026</p>
 
-        <div className="space-y-8 text-ink-soft leading-relaxed">
+        <div className="space-y-8 leading-relaxed text-ink-soft">
           <section>
-            <h2 className="text-xl font-semibold text-ink mb-3">1. Acceptance of Terms</h2>
+            <h2 className="mb-3 text-xl font-semibold text-ink">1. Acceptance</h2>
             <p>
-              By downloading, installing, or using Wav Messenger (&ldquo;Wav&rdquo;,
-              &ldquo;the App&rdquo;), you agree to be bound by these Terms of Service
-              (&ldquo;Terms&rdquo;). If you do not agree to these Terms, do not use the App.
-              These Terms are a legal agreement between you and Wav Labs
-              (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;).
+              By downloading, installing, or using l8r (&ldquo;the App&rdquo;), you agree
+              to these Terms of Service (&ldquo;Terms&rdquo;), our{" "}
+              <a href="/privacy" className="text-ocean-bright hover:underline">Privacy Policy</a>,
+              and our{" "}
+              <a href="/guidelines" className="text-ocean-bright hover:underline">Community Guidelines</a>.
+              If you don&apos;t agree, don&apos;t use the App. These Terms are a legal
+              agreement between you and Wav Labs (&ldquo;we&rdquo;, &ldquo;us&rdquo;).
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-ink mb-3">2. Eligibility</h2>
+            <h2 className="mb-3 text-xl font-semibold text-ink">2. You Must Be 18 or Older</h2>
             <p>
-              You must be at least 13 years old to use Wav. If you are between 13 and 18,
-              you represent that your parent or legal guardian has reviewed and agreed to
-              these Terms on your behalf. Users under 13 are not permitted and will be
-              removed from the service.
+              l8r is strictly for adults. You confirm you are at least 18 years old and
+              legally able to enter this agreement. There are no exceptions. We remove
+              accounts we believe belong to minors and report them where required by
+              law. See our{" "}
+              <a href="/child-safety" className="text-ocean-bright hover:underline">Child Safety Standards</a>.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-ink mb-3">3. Your Account</h2>
-            <p className="mb-3">
-              To use Wav, you must create an account. You agree to:
-            </p>
-            <ul className="list-disc pl-6 space-y-2">
-              <li>Provide accurate and truthful information when registering.</li>
-              <li>Choose a username that is not offensive, misleading, or impersonating another person.</li>
-              <li>Keep your account credentials secure and confidential.</li>
-              <li>Notify us immediately if you believe your account has been compromised.</li>
-              <li>Be responsible for all activity that occurs under your account.</li>
-            </ul>
-            <p className="mt-3">
-              You may delete your account at any time from within the App&apos;s settings.
-              Account deletion is permanent and will remove your profile, messages, and
-              associated data.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-xl font-semibold text-ink mb-3">4. Acceptable Use</h2>
-            <p className="mb-3">You agree not to use Wav to:</p>
-            <ul className="list-disc pl-6 space-y-2">
-              <li>Harass, bully, threaten, or intimidate any person.</li>
-              <li>Send spam, unsolicited messages, or promotional content without consent.</li>
-              <li>Share content that is illegal, harmful, defamatory, or infringes on intellectual property rights.</li>
-              <li>Distribute malware, viruses, or any other malicious code.</li>
-              <li>Impersonate another person or misrepresent your identity.</li>
-              <li>Use the service for any unlawful or fraudulent purpose.</li>
-              <li>Attempt to gain unauthorized access to our systems, accounts, or data.</li>
-              <li>Reverse engineer, decompile, or disassemble the App.</li>
-              <li>Use automated scripts, bots, or scrapers to access the service.</li>
-              <li>Interfere with or disrupt the service or servers.</li>
+            <h2 className="mb-3 text-xl font-semibold text-ink">3. Your Account</h2>
+            <ul className="list-disc space-y-2 pl-6">
+              <li>Keep your sign-in credentials private — you&apos;re responsible for everything under your account.</li>
+              <li>One person, one account. No shared, sold, or farmed accounts.</li>
+              <li>Provide honest profile information. No impersonation, no bait accounts.</li>
+              <li>Tell us immediately if your account is compromised.</li>
             </ul>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-ink mb-3">5. Content</h2>
+            <h2 className="mb-3 text-xl font-semibold text-ink">4. Your Content</h2>
             <p className="mb-3">
-              You retain ownership of all content you create and share through Wav,
-              including text messages, images, and audio recordings. By sharing content
-              through the service, you grant us a limited license to transmit, store, and
-              display that content solely for the purpose of operating the service.
+              You own the photos, videos, audio, and text you post. You grant us a
+              limited, non-exclusive license to store, process, and display that content
+              to other members as needed to run the service. That license ends when you
+              delete the content or your account.
             </p>
+            <p className="mb-3">You may not post:</p>
+            <ul className="list-disc space-y-2 pl-6">
+              <li>Content you don&apos;t have the right to share.</li>
+              <li>Content of other people without their consent.</li>
+              <li>Anything illegal, or content that violates our Community Guidelines.</li>
+              <li>Child sexual abuse material — removed instantly and reported to NCMEC.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="mb-3 text-xl font-semibold text-ink">5. Location</h2>
+            <p>
+              Discovery works by distance. You control whether your distance is visible
+              in Settings. We only ever show approximate distance — never your exact
+              position. Premium members can use virtual location (passport) to appear
+              elsewhere; abuse of location features to deceive or harass is a violation.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="mb-3 text-xl font-semibold text-ink">6. Conduct</h2>
             <p className="mb-3">
-              You are solely responsible for the content you share. We do not pre-screen
-              content, but we reserve the right to remove any content that violates these
-              Terms or is otherwise objectionable.
-            </p>
-            <p>
-              Messages are stored on our servers to deliver them to recipients and to
-              allow you to access your conversation history. When you delete your account,
-              your messages and content are permanently deleted.
+              The Community Guidelines are part of these Terms. In short: consent is the
+              baseline, no hate, no minors, no marketplace. We use member reports and
+              human review to enforce the rules and may remove content or accounts —
+              with or without warning — that break them.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-ink mb-3">6. Privacy</h2>
+            <h2 className="mb-3 text-xl font-semibold text-ink">7. Subscriptions</h2>
             <p>
-              Your use of Wav is also governed by our{" "}
-              <a href="/privacy" className="text-ocean-bright hover:underline">
-                Privacy Policy
-              </a>
-              , which describes how we collect, use, and protect your information. Please
-              review it carefully.
+              Premium features are sold as auto-renewing subscriptions through the App
+              Store or Google Play. Billing, renewal, cancellation, and refunds are
+              handled by the store under its own terms — we never see your payment
+              details. If a subscription lapses, premium features turn off; nothing else
+              about your account changes.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-ink mb-3">7. No Advertisements</h2>
+            <h2 className="mb-3 text-xl font-semibold text-ink">8. Safety Disclaimer</h2>
             <p>
-              Wav does not display advertisements. We do not sell your data to
-              advertisers or third parties. We are committed to a user-first experience
-              free from ad-driven engagement manipulation.
+              l8r facilitates introductions between adults. We cannot verify everything
+              members say, and we are not responsible for member conduct on or off the
+              app. Exercise ordinary caution: meet in public, tell a friend, and trust
+              your instincts. Our Community Guidelines cover the basics.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-ink mb-3">8. Service Availability</h2>
+            <h2 className="mb-3 text-xl font-semibold text-ink">9. Ending Your Account</h2>
             <p>
-              We strive to maintain reliable service but do not guarantee uninterrupted
-              access. The service may be temporarily unavailable due to maintenance,
-              updates, or factors beyond our control. We may modify, suspend, or
-              discontinue any feature of the service at any time without notice.
+              Delete your account any time in Settings. Deletion is permanent: your
+              profile, photos, activity, and conversation participation are removed, and
+              messages you sent are anonymized. We can suspend or terminate accounts
+              that violate these Terms.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-ink mb-3">9. Disclaimers</h2>
+            <h2 className="mb-3 text-xl font-semibold text-ink">10. The Service As-Is</h2>
             <p>
-              The service is provided &ldquo;as is&rdquo; and &ldquo;as available&rdquo;
-              without warranties of any kind, whether express or implied. We do not
-              warrant that the service will be error-free, secure, or available at all
-              times. You use the service at your own risk.
+              l8r is provided &ldquo;as is&rdquo; without warranties of any kind, express
+              or implied. We don&apos;t guarantee the service will be uninterrupted,
+              error-free, or that you&apos;ll meet anyone.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-ink mb-3">10. Limitation of Liability</h2>
+            <h2 className="mb-3 text-xl font-semibold text-ink">11. Liability</h2>
             <p>
-              To the maximum extent permitted by law, Wav Labs shall not be liable for any
-              indirect, incidental, special, consequential, or punitive damages, or any
-              loss of data, profits, or goodwill, arising from your use of or inability to
-              use the service. Our total liability for any claim shall not exceed the
-              amount you have paid us, if any, to use the service.
+              To the maximum extent the law allows, Wav Labs is not liable for indirect,
+              incidental, or consequential damages arising from your use of the App —
+              including interactions with other members, on or off the platform.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-ink mb-3">11. Indemnification</h2>
+            <h2 className="mb-3 text-xl font-semibold text-ink">12. Changes to These Terms</h2>
             <p>
-              You agree to indemnify and hold harmless Wav Labs and its affiliates from
-              any claims, damages, losses, or expenses (including legal fees) arising from
-              your use of the service or your violation of these Terms.
+              We may update these Terms as the product evolves. Material changes are
+              announced in the app before they take effect; the date above reflects the
+              current version. Continued use after changes take effect means you accept
+              them.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-ink mb-3">12. Changes to These Terms</h2>
+            <h2 className="mb-3 text-xl font-semibold text-ink">13. Contact</h2>
             <p>
-              We may update these Terms from time to time. If we make material changes, we
-              will notify you through the App or by email. Your continued use of the
-              service after changes take effect constitutes acceptance of the updated
-              Terms.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-xl font-semibold text-ink mb-3">13. Termination</h2>
-            <p>
-              We may suspend or terminate your account at any time if we believe you have
-              violated these Terms or for any other reason at our discretion. You may stop
-              using the service and delete your account at any time.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-xl font-semibold text-ink mb-3">14. Governing Law</h2>
-            <p>
-              These Terms shall be governed by and construed in accordance with the laws
-              of the State of Nevada, without regard to its conflict of law provisions.
-              Any disputes arising from these Terms or your use of the service shall be
-              resolved in the courts located in Clark County, Nevada.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-xl font-semibold text-ink mb-3">15. Contact</h2>
-            <p>
-              If you have questions about these Terms, you can contact us at{" "}
+              Questions about these Terms:{" "}
               <a href="mailto:support@wavlabs.dev" className="text-ocean-bright hover:underline">
                 support@wavlabs.dev
               </a>
@@ -196,7 +162,10 @@ export default function TermsPage() {
         </div>
 
         <div className="mt-16 border-t border-border pt-8">
-          <a href="/" className="text-ocean-bright hover:underline">Back to home</a>
+          <a href="/" className="flex items-center gap-2 text-ocean-bright hover:underline">
+            <img src="/wavlabs-logo.png" alt="" className="h-4 w-4" />
+            Wav Labs
+          </a>
         </div>
       </div>
     </div>

@@ -1,8 +1,9 @@
 import { LifeBuoy, Mail, Bug, MessageCircle, BookOpen } from "lucide-react";
 
 export const metadata = {
-  title: "Support — Wav Labs",
-  description: "Get help with Wav Messenger. Contact us, report bugs, and find answers to common questions.",
+  title: "Support — l8r by Wav Labs",
+  description:
+    "Get help with l8r. Contact us, report bugs, and find answers to common questions.",
 };
 
 export default function SupportPage() {
@@ -14,8 +15,8 @@ export default function SupportPage() {
           <h1 className="text-3xl font-bold">Support</h1>
         </div>
 
-        <p className="mb-12 text-ink-soft leading-relaxed">
-          Need help with Wav Messenger? We&apos;re a small team but we read every message.
+        <p className="mb-12 leading-relaxed text-ink-soft">
+          Need help with l8r? We&apos;re a small team but we read every message.
           Here&apos;s how to reach us and what to expect.
         </p>
 
@@ -52,48 +53,76 @@ export default function SupportPage() {
           <div className="space-y-8">
             <div>
               <h3 className="mb-2 text-lg font-semibold text-ink">
-                Do I need a phone number to sign up?
+                Is l8r really 18+ only?
               </h3>
-              <p className="text-ink-soft leading-relaxed">
-                No. Wav is username-first — you pick a unique username and that&apos;s how
-                people find you. No phone number required, ever.
+              <p className="leading-relaxed text-ink-soft">
+                Yes, strictly. l8r is a members-only app for adult gay men. Age is
+                verified at signup and we remove any account that belongs to a minor.
+                See our{" "}
+                <a href="/child-safety" className="text-ocean-bright underline">
+                  Child Safety Standards
+                </a>
+                .
               </p>
             </div>
 
             <div>
               <h3 className="mb-2 text-lg font-semibold text-ink">
-                How do I find someone on Wav?
+                How does discovery work?
               </h3>
-              <p className="text-ink-soft leading-relaxed">
-                Go to the Discover tab and search by username. You can also browse groups
-                by category. Once you find someone, send them a friend request or start a
-                conversation directly.
+              <p className="leading-relaxed text-ink-soft">
+                The grid shows members near you, sorted by distance. Free members get a
+                generous daily allowance of profile views; premium members get
+                unlimited browsing plus advanced filters.
               </p>
             </div>
 
             <div>
               <h3 className="mb-2 text-lg font-semibold text-ink">
-                Are my messages private?
+                Can I hide my location or browse privately?
               </h3>
-              <p className="text-ink-soft leading-relaxed">
-                Yes. Your messages are stored securely and are only visible to you and the
-                people in the conversation. We don&apos;t read your messages, sell your
-                data, or show ads. See our{" "}
-                <a href="/privacy" className="text-ocean-bright underline">
-                  Privacy Policy
-                </a>{" "}
-                for details.
+              <p className="leading-relaxed text-ink-soft">
+                You can hide your distance in Settings, and premium members can browse
+                incognito — invisible in grids and view counts until they choose to be
+                seen. We never show your exact position to anyone.
               </p>
             </div>
 
             <div>
               <h3 className="mb-2 text-lg font-semibold text-ink">
-                Can I block someone?
+                What are sparks and views?
               </h3>
-              <p className="text-ink-soft leading-relaxed">
-                Yes. Tap the person&apos;s name in a conversation to open their profile,
-                then tap &ldquo;Block.&rdquo; You can manage blocked users in Settings.
-                Blocked users can&apos;t send you messages or friend requests.
+              <p className="leading-relaxed text-ink-soft">
+                A spark is a lightweight &ldquo;I&apos;m interested&rdquo; — no message
+                required. Views let you see who checked out your profile. Both live
+                under the Interests tab, and each can be turned off in Settings &rarr;
+                Notifications.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="mb-2 text-lg font-semibold text-ink">
+                Can I keep notifications private on my lock screen?
+              </h3>
+              <p className="leading-relaxed text-ink-soft">
+                Yes — turn on Discreet notifications in Settings &rarr; Notifications
+                and every banner becomes generic: &ldquo;You have a new message&rdquo;
+                instead of names or previews. You can also blur the app in the
+                multitasking switcher and change the app icon.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="mb-2 text-lg font-semibold text-ink">
+                How do I block or report someone?
+              </h3>
+              <p className="leading-relaxed text-ink-soft">
+                From any profile or conversation — blocking is instant and total, and
+                reports go straight to human review. See our{" "}
+                <a href="/guidelines" className="text-ocean-bright underline">
+                  Community Guidelines
+                </a>
+                .
               </p>
             </div>
 
@@ -101,30 +130,23 @@ export default function SupportPage() {
               <h3 className="mb-2 text-lg font-semibold text-ink">
                 How do I delete my account?
               </h3>
-              <p className="text-ink-soft leading-relaxed">
-                Go to Settings &rarr; Delete account. This permanently removes your
-                account, messages, and profile. This action cannot be undone.
+              <p className="leading-relaxed text-ink-soft">
+                You tab &rarr; scroll to the bottom &rarr; Delete account. It&apos;s
+                permanent — profile, photos, messages, and all associated data are
+                removed. Full details on our{" "}
+                <a href="/delete-account" className="text-ocean-bright underline">
+                  account deletion page
+                </a>
+                .
               </p>
             </div>
 
             <div>
               <h3 className="mb-2 text-lg font-semibold text-ink">
-                What devices does Wav support?
+                What devices does l8r support?
               </h3>
-              <p className="text-ink-soft leading-relaxed">
-                Wav Messenger is currently available on iPhone (iOS 16+). An Android
-                version is in development.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="mb-2 text-lg font-semibold text-ink">
-                I forgot my password — how do I reset it?
-              </h3>
-              <p className="text-ink-soft leading-relaxed">
-                On the sign-in screen, tap &ldquo;Forgot password&rdquo; and enter your
-                email. We&apos;ll send you a link to set a new password. If you&apos;re
-                already signed in, you can change your password in Settings.
+              <p className="leading-relaxed text-ink-soft">
+                l8r is available on iPhone and Android.
               </p>
             </div>
           </div>
@@ -135,14 +157,21 @@ export default function SupportPage() {
           <MessageCircle className="mx-auto mb-4 h-8 w-8 text-ocean-bright" />
           <h2 className="mb-2 text-xl font-bold">Still need help?</h2>
           <p className="mb-4 text-ink-soft">
-            We&apos;re here for you. Drop us a line and we&apos;ll get back to you as soon
-            as we can.
+            We&apos;re here for you. Drop us a line and we&apos;ll get back to you as
+            soon as we can.
           </p>
           <a
             href="mailto:support@wavlabs.dev"
-            className="inline-block rounded-full bg-ocean px-6 py-3 text-white font-medium transition hover:bg-ocean-bright"
+            className="inline-block rounded-full bg-ocean px-6 py-3 font-medium text-white transition hover:bg-ocean-bright"
           >
             Contact Support
+          </a>
+        </div>
+
+        <div className="mt-16 border-t border-border pt-8">
+          <a href="/" className="flex items-center gap-2 text-ocean-bright hover:underline">
+            <img src="/wavlabs-logo.png" alt="" className="h-4 w-4" />
+            Wav Labs
           </a>
         </div>
       </div>

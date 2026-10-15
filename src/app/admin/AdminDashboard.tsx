@@ -11,7 +11,6 @@ import {
   Shield,
   Smartphone,
   TrendingUp,
-  Clock,
   Lock,
   Search,
   Ban,
@@ -90,10 +89,16 @@ export default function AdminDashboard({ stats }: { stats: Stats }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [tab, setTab] = useState<Tab>("stats");
+  const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
     const saved = sessionStorage.getItem("wav-admin");
     if (saved === "ok") setAuthed(true);
+    // Auto-collapse on smaller screens
+    const checkWidth = () => setCollapsed(window.innerWidth < 1024);
+    checkWidth();
+    window.addEventListener("resize", checkWidth);
+    return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   function handleLogin(e: React.FormEvent) {
@@ -152,63 +157,121 @@ export default function AdminDashboard({ stats }: { stats: Stats }) {
   ];
 
   return (
-    <div className="min-h-screen bg-sand">
-      <header className="border-b border-border bg-surface">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-3">
-            <TrendingUp className="h-6 w-6 text-ocean-glow" />
-            <h1 className="text-xl font-bold text-ink">Wav Admin</h1>
-          </div>
-          <div className="flex items-center gap-4 text-sm text-ink-soft">
-            <span className="flex items-center gap-1.5">
-              <Clock className="h-4 w-4" /> Live
-            </span>
-            <a href="/" className="transition hover:text-ocean-glow">Site</a>
-            <button
-              onClick={() => {
-                sessionStorage.removeItem("wav-admin");
-                setAuthed(false);
-              }}
-              className="text-coral transition hover:text-coral-bright"
-            >
-              Logout
-            </button>
-          </div>
+    <div className="flex min-h-screen bg-sand">
+      {/* Side navigation */}
+      <aside
+        className={`sticky top-0 flex h-screen flex-col border-r border-border bg-surface transition-all duration-200 ${
+          collapsed ? "w-16" : "w-56"
+        }`}
+      >
+        {/* Logo / brand */}
+        <div className={`flex items-center border-b border-border px-4 py-4 ${collapsed ? "justify-center" : "gap-2.5"}`}>
+          <TrendingUp className="h-6 w-6 shrink-0 text-ocean-glow" />
+          {!collapsed && <h1 className="text-lg font-bold text-ink">Wav Admin</h1>}
         </div>
-      </header>
 
-      {/* Tab bar */}
-      <nav className="border-b border-border bg-surface">
-        <div className="mx-auto flex max-w-7xl gap-1 px-6">
+        {/* Nav items */}
+        <nav className="flex flex-1 flex-col gap-1 p-2">
           {tabs.map((t) => (
             <button
               key={t.id}
               onClick={() => setTab(t.id)}
-              className={`relative flex items-center gap-2 px-4 py-3 text-sm font-medium transition ${
+              title={collapsed ? t.label : undefined}
+              className={`relative flex items-center rounded-xl px-3 py-2.5 text-sm font-medium transition ${
+                collapsed ? "justify-center" : "gap-3"
+              } ${
                 tab === t.id
-                  ? "text-ocean-glow border-b-2 border-ocean-glow"
-                  : "text-ink-soft hover:text-ink"
+                  ? "bg-ocean/10 text-ocean-glow"
+                  : "text-ink-soft hover:bg-ink/5 hover:text-ink"
               }`}
             >
-              <t.icon className="h-4 w-4" />
-              {t.label}
-              {t.badge !== undefined && t.badge > 0 && (
-                <span className="ml-1 rounded-full bg-coral px-2 py-0.5 text-xs font-bold text-white">
+              <t.icon className="h-5 w-5 shrink-0" />
+              {!collapsed && <span>{t.label}</span>}
+              {!collapsed && t.badge !== undefined && t.badge > 0 && (
+                <span className="ml-auto rounded-full bg-coral px-2 py-0.5 text-xs font-bold text-white">
                   {t.badge}
                 </span>
               )}
+              {collapsed && t.badge !== undefined && t.badge > 0 && (
+                <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-coral" />
+              )}
             </button>
           ))}
-        </div>
-      </nav>
+        </nav>
 
-      <main className="mx-auto max-w-7xl px-6 py-8">
-        {tab === "stats" && <StatsTab stats={stats} />}
-        {tab === "users" && <UsersTab initialUsers={stats.recentUsers} />}
-        {tab === "reports" && <ReportsTab reports={stats.reports} />}
-        {tab === "groups" && <GroupsTab groups={stats.groups} />}
-        {tab === "broadcast" && <BroadcastTab deviceCount={stats.counts.deviceTokens} />}
-      </main>
+        {/* Bottom controls */}
+        <div className="border-t border-border p-2">
+          <button
+            onClick={() => setCollapsed(!collapsed)}
+            title={collapsed ? "Expand" : "Collapse"}
+            className="flex w-full items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-sm text-ink-soft transition hover:bg-ink/5 hover:text-ink"
+          >
+            {collapsed ? (
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            ) : (
+              <>
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+                <span>Collapse</span>
+              </>
+            )}
+          </button>
+          <a
+            href="/"
+            className={`flex items-center rounded-xl px-3 py-2.5 text-sm text-ink-soft transition hover:bg-ink/5 hover:text-ink ${
+              collapsed ? "justify-center" : "gap-3"
+            }`}
+          >
+            <svg className="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            {!collapsed && <span>Site</span>}
+          </a>
+          <button
+            onClick={() => {
+              sessionStorage.removeItem("wav-admin");
+              setAuthed(false);
+            }}
+            className={`flex items-center rounded-xl px-3 py-2.5 text-sm text-coral transition hover:bg-coral/10 ${
+              collapsed ? "justify-center" : "gap-3"
+            }`}
+          >
+            <svg className="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+            {!collapsed && <span>Logout</span>}
+          </button>
+        </div>
+      </aside>
+
+      {/* Main content */}
+      <div className="flex flex-1 flex-col overflow-hidden">
+        {/* Top bar */}
+        <header className="flex items-center justify-between border-b border-border bg-surface px-6 py-3">
+          <h2 className="text-lg font-semibold text-ink capitalize">
+            {tabs.find((t) => t.id === tab)?.label}
+          </h2>
+          <div className="flex items-center gap-2 text-sm text-ink-soft">
+            <span className="flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" /> Live
+            </span>
+          </div>
+        </header>
+
+        {/* Tab content */}
+        <main className="flex-1 overflow-y-auto p-6">
+          <div className="mx-auto max-w-6xl">
+            {tab === "stats" && <StatsTab stats={stats} />}
+            {tab === "users" && <UsersTab initialUsers={stats.recentUsers} />}
+            {tab === "reports" && <ReportsTab reports={stats.reports} />}
+            {tab === "groups" && <GroupsTab groups={stats.groups} />}
+            {tab === "broadcast" && <BroadcastTab deviceCount={stats.counts.deviceTokens} />}
+          </div>
+        </main>
+      </div>
     </div>
   );
 }
